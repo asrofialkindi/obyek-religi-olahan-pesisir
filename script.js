@@ -28,28 +28,48 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 //  layer.bindPopup(feature.properties.nazwa);
 //}
 
+// function onEachFeature(feature, layer) {
+//   const p = feature.properties;
+//   const popupContent = `
+//     <h3>${p['Nama Objek'] || '—'}</h3>
+//     <table>
+//       <tr>
+//         <th>Kelompok O</th>
+//         <td>${p['Kelompok O'] || '—'}</td>
+//       </tr>
+//       <tr>
+//         <th>Sub</th>
+//         <td>${p['Sub'] || '—'}</td>
+//       </tr>
+//       <tr>
+//         <th>Desa</th>
+//         <td>${p['Desa'] || '—'}</td>
+//       </tr>
+//     </table>
+//   `;
+//   layer.bindPopup(popupContent, {
+//     maxWidth: 250
+//   });
+// }
+
 function onEachFeature(feature, layer) {
   const p = feature.properties;
+
+  // Generate a safe image filename (e.g. replace spaces with dashes or underscores)
+  const imageName = (p['Nama Objek'] || '').toLowerCase().replace(/\s+/g, '-');
+  const imagePath = `img/${imageName}.jpg`; // assumes .jpg extension
+
   const popupContent = `
     <h3>${p['Nama Objek'] || '—'}</h3>
     <table>
-      <tr>
-        <th>Kelompok O</th>
-        <td>${p['Kelompok O'] || '—'}</td>
-      </tr>
-      <tr>
-        <th>Sub</th>
-        <td>${p['Sub'] || '—'}</td>
-      </tr>
-      <tr>
-        <th>Desa</th>
-        <td>${p['Desa'] || '—'}</td>
-      </tr>
+      <tr><th>Desa</th><td>${p['Desa'] || '—'}</td></tr>
+      <tr><th>Nama Objek</th><td>${p['Nama Objek'] || '—'}</td></tr>
+      <tr><th>Deskripsi</th><td>${p['Deskripsi'] || '—'}</td></tr>
     </table>
+    <img src="${imagePath}" alt="${p['Nama Objek']}" style="width:100%; max-height:150px; object-fit:cover; margin-bottom:8px;" />
   `;
-  layer.bindPopup(popupContent, {
-    maxWidth: 250
-  });
+
+  layer.bindPopup(popupContent, { maxWidth: 250 });
 }
 
 
