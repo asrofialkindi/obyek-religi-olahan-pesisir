@@ -24,19 +24,51 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+//function onEachFeature(feature, layer) {
+//  layer.bindPopup(feature.properties.nazwa);
+//}
+
 function onEachFeature(feature, layer) {
-  layer.bindPopup(feature.properties.nazwa);
+  const p = feature.properties;
+  const popupContent = `
+    <h3>${p['Nama Objek'] || '—'}</h3>
+    <table>
+      <tr>
+        <th>Kelompok O</th>
+        <td>${p['Kelompok O'] || '—'}</td>
+      </tr>
+      <tr>
+        <th>Sub</th>
+        <td>${p['Sub'] || '—'}</td>
+      </tr>
+      <tr>
+        <th>Desa</th>
+        <td>${p['Desa'] || '—'}</td>
+      </tr>
+    </table>
+  `;
+  layer.bindPopup(popupContent, {
+    maxWidth: 250
+  });
 }
+
 
 // adding geojson by fetch
 // of course you can use jquery, axios etc.
-fetch("./obyek-religi-olahan-pesisir-point.geojson")
-  .then(function (response) {
-    return response.json();
+// fetch("./obyek-religi-olahan-pesisir-point.geojson")
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (data) {
+//     // use geoJSON
+//     L.geoJSON(data, {
+//       onEachFeature: onEachFeature,
+//     }).addTo(map);
+//   });
+
+fetch('obyek-religi-olahan-pesisir-point.geojson')
+  .then(res => res.json())
+  .then(data => {
+    L.geoJSON(data, { onEachFeature }).addTo(map);
   })
-  .then(function (data) {
-    // use geoJSON
-    L.geoJSON(data, {
-      onEachFeature: onEachFeature,
-    }).addTo(map);
-  });
+  .catch(err => console.error(err));
