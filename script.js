@@ -6,10 +6,10 @@
 // config map
 let config = {
   minZoom: 2,
-  maxZoom: 18,
+  maxZoom: 24,
 };
 // magnification with which the map will start
-const zoom = 6;
+const zoom = 17;
 // co-ordinates
 const lat = -6.662189;
 const lng = 111.469324;
