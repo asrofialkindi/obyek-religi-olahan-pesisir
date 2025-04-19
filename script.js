@@ -30,7 +30,7 @@ function onEachFeature(feature, layer) {
 
 // adding geojson by fetch
 // of course you can use jquery, axios etc.
-fetch("../obyek-religi-olahan-pesisir-point.geojson")
+fetch("./obyek-religi-olahan-pesisir-point.geojson")
   .then(function (response) {
     return response.json();
   })
