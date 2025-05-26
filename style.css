@@ -6,40 +6,42 @@
   margin: 0;
 }
 
-html {
+/* Updated base styles */
+html,
+body {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-body,
-html,
 #map {
+  height: 100vh;
   width: 100%;
-  height: 97.5%;
+  position: relative;
 }
 
 body {
   position: relative;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  height: 100%;
-  min-height: 100%;
-  padding: 0;
-  margin: 0;
   background-color: #f1f1f1;
 }
 
+/* Updated marker position styling */
 .marker-position {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
   z-index: 999;
   padding: 10px;
   font-weight: 700;
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .nav-btn {
-  background: #4CAF50;
+  background: #4caf50;
   border: none;
   color: white;
   padding: 8px 16px;
@@ -59,4 +61,20 @@ body {
 .custom-popup .leaflet-popup-content-wrapper {
   border-radius: 8px;
   padding: 12px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .custom-popup .leaflet-popup-content-wrapper {
+    width: 250px !important;
+  }
+
+  .leaflet-popup-content {
+    font-size: 14px;
+  }
+
+  .nav-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
 }
