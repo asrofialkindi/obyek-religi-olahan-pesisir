@@ -29,7 +29,7 @@ body {
 
 /* Updated marker position styling */
 .marker-position {
-  position: fixed;
+  position: relative;
   bottom: 10px;
   left: 10px;
   z-index: 999;
